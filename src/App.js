@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React , { useContext}from 'react';
+import Header from './components/Header';
+import Routes from './routes/'
+import {useDataBase,useDataBasePush} from './Hooks/useDataBase'
+import Footer from './components/Footer'
+import {AuthComponent} from './auth'
+
 
 function App() {
+
+  const {data} = useDataBase('comentarios')
+  const [save, status] = useDataBasePush('comentarios')
+ 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    
+    <AuthComponent>
+      
+      <Routes list={data}/>
+      <Footer/>
+    </AuthComponent>
+
+
+
+    </>
   );
 }
 
